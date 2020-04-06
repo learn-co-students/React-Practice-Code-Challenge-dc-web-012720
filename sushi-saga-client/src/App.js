@@ -11,7 +11,9 @@ class App extends Component {
     super();
     this.state = {
       allSushi: [],
-      display_index: 0
+      display_index: 0,
+      eaten: [],
+      money: 100
     }
   }
   
@@ -32,11 +34,21 @@ class App extends Component {
     })
   }
 
+  sushiIsEaten = (sushi) => {
+    const balance = this.state.money - sushi.price
+      if (!this.state.eaten.includes(sushi) && balance >= 0) {
+        this.setState({
+          eaten: [...this.state.eaten, sushi],
+          money: balance
+        })
+      }
+  }
+
   render() {
     return (
       <div className="app">
-        <SushiContainer allSushi={this.showSushi()} btnFunction = {this.updateDisplayIndex}/>
-        <Table />
+        <SushiContainer allSushi={this.showSushi()} eaten={this.state.eaten} btnFunction = {this.updateDisplayIndex} sushiIsEaten={this.sushiIsEaten}/>
+        <Table money={this.state.money} plateNum={this.state.eaten}/>
       </div>
     );
   }

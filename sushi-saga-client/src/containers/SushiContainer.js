@@ -4,7 +4,7 @@ import Sushi from '../components/Sushi'
 
 const SushiContainer = (props) => {
 
-  let sushiCompArray = props.allSushi.map(sushiObj => <Sushi sushi={sushiObj} key = {sushiObj.id} />)
+  let sushiCompArray = props.allSushi.map(sushiObj => <Sushi sushi={sushiObj} eaten={props.eaten} isEaten={props.sushiIsEaten} key = {sushiObj.id} />)
   return (
     <Fragment>
       <div className="belt">
