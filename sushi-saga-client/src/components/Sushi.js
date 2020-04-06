@@ -1,22 +1,31 @@
-import React, { Fragment } from 'react'
+import React, { useState } from 'react'
 
-const Sushi = (props) => {
+const Sushi = ({ sushiData, removeASushi, total, totalSet }) => {
+
+  const [eaten, eatenSet] = useState(false)
+  // const [warning, warningSet] = useState(false)
+
+  function removeSushi() {
+    if (total - sushiData.price > 0) {
+      eatenSet(true);
+      removeASushi(sushiData)
+      totalSet(total - sushiData.price)
+    } else {
+      alert("No Money")
+    }
+  }
+
   return (
     <div className="sushi">
-      <div className="plate" 
-           onClick={/* Give me a callback! */ null}>
-        { 
-          /* Tell me if this sushi has been eaten! */ 
-          false ?
-            null
-          :
-            <img src={/* Give me an image source! */ } width="100%" />
-        }
+      <div className="plate" >
+        {eaten ? null : <img src={sushiData.img_url} width="100%" alt={sushiData.name} onClick={removeSushi} />}
       </div>
+
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {sushiData.name} ${sushiData.price}
       </h4>
-    </div>
+      {/* {warning ? <div>CAN'T AFFORD THIS!</div> : null} */}
+    </div >
   )
 }
 
