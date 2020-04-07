@@ -9,7 +9,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      allSushis: []
+      allSushis: [],
+      indexSushi: 0
     }
   }
 
@@ -22,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <SushiContainer />
+        <SushiContainer sushis={this.state.allSushis.slice(this.state.indexSushi,this.state.indexSushi+4)} />
         <Table />
       </div>
     );
